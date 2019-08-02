@@ -18,6 +18,7 @@
         }
     },
     "require-dev": {
-        "robmorgan/phinx": "^0.10.8"
+        "robmorgan/phinx": "^0.10.8",
+        "fzaninotto/faker": "^1.4"
     }
 }
