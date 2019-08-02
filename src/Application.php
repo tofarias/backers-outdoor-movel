@@ -2,10 +2,10 @@
 
 namespace Backers;
 
-use Fin\Plugins\PluginInterface;
+use Backers\Plugins\PluginInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Zend\Diactoros\Response\SapiEmitter;
+use Zend\HttpHandlerRunner\Emitter\SapiEmitter;
 
 class Application
 {

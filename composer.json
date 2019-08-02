@@ -11,7 +11,8 @@
         "vlucas/phpdotenv": "^3.4",
         "xtreamwayz/pimple-container-interop": "^1.0",
         "aura/router": "^3.1",
-        "zendframework/zend-diactoros": "^2.1"
+        "zendframework/zend-diactoros": "^2.1",
+        "zendframework/zend-httphandlerrunner": "^1.1"
     },
     "autoload":
     {
