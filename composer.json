@@ -8,7 +8,8 @@
     ],
     "require":
     {
-        "vlucas/phpdotenv": "^3.4"
+        "vlucas/phpdotenv": "^3.4",
+        "xtreamwayz/pimple-container-interop": "^1.0"
     },
     "autoload":
     {
