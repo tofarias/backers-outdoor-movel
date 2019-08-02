@@ -1,6 +1,6 @@
 <?php
 
-namespace Fin;
+namespace Backers;
 
 use Fin\Plugins\PluginInterface;
 use Psr\Http\Message\RequestInterface;

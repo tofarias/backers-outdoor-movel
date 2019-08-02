@@ -1,6 +1,6 @@
 <?php
 
-namespace Fin;
+namespace Backers;
 
 use Xtreamwayz\Pimple\Container;
 
