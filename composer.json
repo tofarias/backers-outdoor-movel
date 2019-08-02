@@ -23,9 +23,9 @@
     },
     "scripts": {
         "db:refresh": [
-            "vendor\\bin\\phinx.bat rollback --ansi",
-            "vendor\\bin\\phinx.bat migrate --ansi",
-            "vendor\\bin\\phinx.bat seed:run --ansi"
+            "vendor\\bin\\phinx.bat rollback -t 0 -e development --ansi",
+            "vendor\\bin\\phinx.bat migrate -e development --ansi",
+            "vendor\\bin\\phinx.bat seed:run -e development --ansi"
         ]
     }
 }
