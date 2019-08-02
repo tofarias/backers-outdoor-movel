@@ -3,7 +3,7 @@
 require __DIR__.'/vendor/autoload.php';
 
 if( file_exists(__DIR__.'/.env') ){
-    $dotEnv = new \Dotenv\Dotenv(__DIR__);
+    $dotEnv = \Dotenv\Dotenv::create(__DIR__);
     $dotEnv->overload();
 }
 
