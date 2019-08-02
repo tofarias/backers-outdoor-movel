@@ -20,5 +20,12 @@
     "require-dev": {
         "robmorgan/phinx": "^0.10.8",
         "fzaninotto/faker": "^1.4"
+    },
+    "scripts": {
+        "db:refresh": [
+            "vendor\\bin\\phinx.bat rollback --ansi",
+            "vendor\\bin\\phinx.bat migrate --ansi",
+            "vendor\\bin\\phinx.bat seed:run --ansi"
+        ]
     }
 }
