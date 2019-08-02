@@ -5,7 +5,7 @@ use Phinx\Seed\AbstractSeed;
 class UsersSeeder extends AbstractSeed
 {
     public function run()
-    {
+    {/*
         #$app = require __DIR__ . '/../bootstrap.php';
         $auth = $app->service('auth');
 
@@ -21,5 +21,6 @@ class UsersSeeder extends AbstractSeed
         ])->save();
 
         $users->insert($data)->save();
+        */
     }
 }
