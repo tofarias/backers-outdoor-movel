@@ -12,9 +12,15 @@ $serviceContainer = new \Backers\ServiceContainer();
 $app = new \Backers\Application( $serviceContainer );
 
 $app->plugin( new \Backers\Plugins\RoutePlugin() );
-#$app->plugin( new \Backers\Plugins\ViewPlugin() );
+$app->plugin( new \Backers\Plugins\ViewPlugin() );
 #$app->plugin( new \Backers\Plugins\DbPlugin() );
 #$app->plugin( new \Backers\Plugins\AuthPlugin() );
+
+$app->get('/', function(\Psr\Http\Message\RequestInterface $request) use ($app){
+
+    $view = $app->service('view.renderer');
+    return $view->render('test.html.twig',['name' => 'Tiago']);
+});
 
 
 
