@@ -13,7 +13,7 @@ $app = new \Backers\Application( $serviceContainer );
 
 $app->plugin( new \Backers\Plugins\RoutePlugin() );
 $app->plugin( new \Backers\Plugins\ViewPlugin() );
-#$app->plugin( new \Backers\Plugins\DbPlugin() );
+$app->plugin( new \Backers\Plugins\DbPlugin() );
 #$app->plugin( new \Backers\Plugins\AuthPlugin() );
 
 $app->get('/', function(\Psr\Http\Message\RequestInterface $request) use ($app){
@@ -30,8 +30,9 @@ $app->get('/home/{name}/{id}', function(\Psr\Http\Message\RequestInterface $requ
     return $response;
 });
 
+
+require_once __DIR__.'/../src/controllers/clients.php';
 /*
-require_once __DIR__.'/../src/controllers/category-costs.php';
 require_once __DIR__.'/../src/controllers/bill-receives.php';
 require_once __DIR__.'/../src/controllers/bill-pays.php';
 require_once __DIR__.'/../src/controllers/users.php';
