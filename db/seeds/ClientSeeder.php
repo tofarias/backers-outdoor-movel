@@ -51,8 +51,10 @@ class ClientSeeder extends AbstractSeed
             $dataCPF[] = [
                 'name' => $faker->name(),
                 'email' => $faker->unique()->email(),
+                'phone_prefix' => $faker->randomNumber(2),
                 'phone' => $faker->phone(),
-                'doc_id' => 'cpf',
+                'doc_id' => $faker->cpf,
+                'doc_type' => 'cpf',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ];
@@ -63,10 +65,12 @@ class ClientSeeder extends AbstractSeed
             $dataCNPJ[] = [
                 'name' => $faker->name(),
                 'email' => $faker->unique()->email(),
+                'phone_prefix' => $faker->randomNumber(2),
                 'phone' => $faker->phone(),
                 'company_category' => $this->getCompanyCategory(),
                 'car_model' => $this->getCarModel(),
-                'doc_id' => 'cnpj',
+                'doc_id' => $faker->cnpj,
+                'doc_type' => 'cnpj',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ];
