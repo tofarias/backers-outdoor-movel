@@ -22,7 +22,7 @@ $app->get(
 
         $view = $app->service('view.renderer');
         return $view->render('client/list.html.twig', compact('categories'));
-    }, 'client.list'
+    }, 'clients.list'
 );
 */
 
@@ -42,49 +42,55 @@ $app->post(
         $data = $request->getParsedBody();
         #$data['user_id'] = $auth->user()->getId();
 
-        #$repository = $app->service('category-cost.repository');
+        #$repository = $app->service('client.repository');
         #$repository->create($data);
 
         Backers\Models\Client::create( $data );
 
         return new \Zend\Diactoros\Response\RedirectResponse('/clients');
 
-        //return $app->route('client.list');
+        //return $app->route('clients.list');
     }, 'client.store'
 );
 
 $app->get(
     '/client/{id}/edit', function (\Psr\Http\Message\ServerRequestInterface $request) use ($app) {
 
+        /*
         $auth = $app->service('auth');
         $repository = $app->service('category-cost.repository');
 
         $id = $request->getAttribute('id');
 
-        $category = $repository->findOneBy(
+        $client = $repository->findOneBy(
             [
             'id' => $id,
-            'user_id' => $auth->user()->getId()
+            #'user_id' => $auth->user()->getId()
             ] 
-        );
+        );*/
+
+        $id = $request->getAttribute('id');
+
+        $client = Backers\Models\Client::find( $id );
 
         $view = $app->service('view.renderer');
-        return $view->render('client/edit.html.twig', compact('category'));
+        return $view->render('clients/edit.html.twig', compact('client'));
     }, 'client.edit'
 );
 
 $app->post(
     '/client/{id}/update', function (\Psr\Http\Message\ServerRequestInterface $request) use ($app) {
 
-        $auth = $app->service('auth');
+        #$auth = $app->service('auth');
 
         $id = $request->getAttribute('id');
-
-        $repository = $app->service('category-cost.repository');
-        // $category = $repository->find( $id );
-
         $data = $request->getParsedBody();
-        $data['user_id'] = $auth->user()->getId();
+
+        #$repository = $app->service('category-cost.repository');
+        // $category = $repository->find( $id );
+        /*
+        $data = $request->getParsedBody();
+        #$data['user_id'] = $auth->user()->getId();
 
         $repository->update(
             [
@@ -93,44 +99,57 @@ $app->post(
             ], $data 
         );
 
-        return $app->route('client.list');
+        */
+
+        $client = Backers\Models\Client::find( $id );
+        $client->fill( $data );
+        $client->save();
+
+        return $app->route('clients.list');
     }, 'client.update'
 );
 
 $app->get(
     '/client/{id}/show', function (\Psr\Http\Message\ServerRequestInterface $request) use ($app) {
 
-        $auth = $app->service('auth');
+        #$auth = $app->service('auth');
 
         $id = $request->getAttribute('id');
 
-        $repository = $app->service('category-cost.repository');
+        /*$repository = $app->service('category-cost.repository');
         $category = $repository->findOneBy(
             [
             'id' => $id,
             'user_id' => $auth->user()->getId()
             ] 
         );
+        */
+
+        $client = Backers\Models\Client::find( $id );
 
         $view = $app->service('view.renderer');
-        return $view->render('client/show.html.twig', compact('category'));
+        return $view->render('clients/show.html.twig', compact('client'));
     }, 'client.show'
 );
 
 $app->get(
     '/client/{id}/delete', function (\Psr\Http\Message\ServerRequestInterface $request) use ($app) {
 
-        $auth = $app->service('auth');
+        #$auth = $app->service('auth');
         $id = $request->getAttribute('id');
 
-        $repository = $app->service('category-cost.repository');
+        /*$repository = $app->service('category-cost.repository');
         $repository->delete(
             [
             'id' => $id,
             'user_id' => $auth->user()->getId()
             ]
         );
+        */
 
-        return $app->route('client.list');
+        $client = Backers\Models\Client::find( $id );
+        $client->delete();
+
+        return $app->route('clients.list');
     }, 'client.delete'
 );
