@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'development' => [
+    'default_connection' => [
         'driver' => getenv('DB_DRIVER'),
         'host' => getenv('DB_HOST'),
         'database' => getenv('DB_DATABASE'),

@@ -17,7 +17,7 @@ list(
     'password'  => $pass,
     'charset'   => $charset,
     'collation' => $collation
-    ) = $db['development'];
+    ) = $db['default_connection'];
 
 return [
   'paths' => [
@@ -30,7 +30,7 @@ return [
   ],
     'environments' => [
         'default_migration_table' => 'migrations',
-        'default_database' => 'development',
+        'default_database' => 'default_connection',
         'development' => [
             'adapter'   => $adapter,
             'host'      => $host,
