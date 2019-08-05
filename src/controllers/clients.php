@@ -30,22 +30,26 @@ $app->get(
     '/client/new', function () use ($app) {
 
         $view = $app->service('view.renderer');
-        return $view->render('client/create.html.twig');
+        return $view->render('clients/create.html.twig');
     }, 'client.new'
 );
 
 $app->post(
     '/client/store', function (\Psr\Http\Message\ServerRequestInterface $request) use ($app) {
 
-        $auth = $app->service('auth');
+        #$auth = $app->service('auth');
 
         $data = $request->getParsedBody();
-        $data['user_id'] = $auth->user()->getId();
+        #$data['user_id'] = $auth->user()->getId();
 
-        $repository = $app->service('category-cost.repository');
-        $repository->create($data);
+        #$repository = $app->service('category-cost.repository');
+        #$repository->create($data);
 
-        return $app->route('client.list');
+        Backers\Models\Client::create( $data );
+
+        return new \Zend\Diactoros\Response\RedirectResponse('/clients');
+
+        //return $app->route('client.list');
     }, 'client.store'
 );
 
