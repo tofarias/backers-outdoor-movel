@@ -7,7 +7,7 @@ use Backers\Repository\RepositoryFactory;
 use Backers\ServiceContainerInterface;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Psr\Container\ContainerInterface;
-use Backers\Models\Client;
+use Backers\Models\{Client,User};
 
 class DbPlugin implements PluginInterface
 {
@@ -25,12 +25,11 @@ class DbPlugin implements PluginInterface
                 return $container->get('repository.factory')->factory(Client::class);
             }
         );
-        /*
+
         $container->addLazy(
             'user.repository', function (ContainerInterface $container) {
-                return $container->get('repository.factory')->factory(\Backers\Models\Users::class);
+                return $container->get('repository.factory')->factory(User::class);
             }
         );
-        */
     }
 }

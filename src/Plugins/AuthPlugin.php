@@ -2,12 +2,10 @@
 declare(strict_types=1);
 namespace Backers\Plugins;
 
+use Interop\Container\ContainerInterface;
 use Backers\Auth\Auth;
 use Backers\Auth\JasnyAuth;
-use Backers\Repository\RepositoryFactory;
 use Backers\ServiceContainerInterface;
-use Illuminate\Database\Capsule\Manager as Capsule;
-use Psr\Container\ContainerInterface;
 
 class AuthPlugin implements PluginInterface
 {
