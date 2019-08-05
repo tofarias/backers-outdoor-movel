@@ -2,7 +2,7 @@
 
 namespace Backers\View\Twig;
 
-use Fin\Auth\AuthInterface;
+use Backers\Auth\AuthInterface;
 
 class TwigGlobals extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
