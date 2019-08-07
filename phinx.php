@@ -7,6 +7,8 @@ if( file_exists(__DIR__.'/.env') ){
     $dotEnv->overload();
 }
 
+date_default_timezone_set('America/Sao_Paulo');
+
 $db = include __DIR__.'/config/db.php';
 
 list(
