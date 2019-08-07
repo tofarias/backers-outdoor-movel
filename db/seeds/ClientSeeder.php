@@ -55,13 +55,15 @@ class ClientSeeder extends AbstractSeed
                 'phone' => $faker->phone(),
                 'doc_id' => $faker->cpf,
                 'doc_type' => 'cpf',
-                'created_at' => date('Y-m-d H:i:s'),
+                'created_at' => $this->getCreatedAt($faker),
                 'updated_at' => date('Y-m-d H:i:s')
             ];
         }
 
         foreach( range(1,5) as $value )
         {
+
+
             $dataCNPJ[] = [
                 'name' => $faker->name(),
                 'email' => $faker->unique()->email(),
@@ -71,13 +73,18 @@ class ClientSeeder extends AbstractSeed
                 'car_model' => $this->getCarModel(),
                 'doc_id' => $faker->cnpj,
                 'doc_type' => 'cnpj',
-                'created_at' => date('Y-m-d H:i:s'),
+                'created_at' => $this->getCreatedAt($faker),
                 'updated_at' => date('Y-m-d H:i:s')
             ];
         }
 
         $client->insert( $dataCPF )->save();
         $client->insert( $dataCNPJ )->save();
+    }
+
+    public function getCreatedAt($faker)
+    {
+        return date_format( $faker->dateTimeThisYear(), 'Y-m-d H:i:s');
     }
 
     public function getCompanyCategory()
