@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <title>Backers</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    {% block stylesheet %}{% endblock stylesheet %}
+
     <style>
-        .font-8pt{ font-size: 8pt; }
+
+        {% block style %}{% endblock style %}
     </style>
 </head>
 <body>
