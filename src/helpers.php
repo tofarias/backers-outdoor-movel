@@ -17,3 +17,19 @@ function numberParse($number)
     $newNumber = str_replace(',', '.', $newNumber);
     return $newNumber;
 }
+
+if (!function_exists('dd')) {
+    function dd()
+    {
+        $args = func_get_args();
+        call_user_func_array('var_dump', $args);
+        die();
+    }
+}
+if (!function_exists('d')) {
+    function d()
+    {
+        $args = func_get_args();
+        call_user_func_array('dump', $args);
+    }
+}

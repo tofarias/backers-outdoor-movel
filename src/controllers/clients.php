@@ -1,16 +1,36 @@
 <?php
 
+use \Psr\Http\Message\ServerRequestInterface;
+
 $app->get(
-    '/clientes', function () use ($app) {
+    '/clientes', function (ServerRequestInterface $request) use ($app) {
 
         #$auth = $app->service('auth');
 
-        $repository = $app->service('client.repository');
-        $clients = $repository->all();
-        #$categories = $repository->findByField('user_id', $auth->user()->getId());
+        #$repository = $app->service('client.repository');
+        #$clients = $repository->all();
+
+        #$data = $request->getParsedBody();
+        //$page = $request->getQueryParams()['page'];
+        #dd( $request->getQueryParams()['page'] );
+        //$data['page'] = $auth->user()->getId();
+
+        $limit = 3;
+
+        if( isset($request->getQueryParams()['page']) ){
+            $page = $request->getQueryParams()['page'];
+            $offset = $page +1;
+        }else{
+            $offset = 0;
+            $page = 1;
+        }
+
+        #$clients = \Backers\Models\Client::all();
+        #$clients = \Backers\Models\Client::skip( $page )->take(2)->get();
+        $clients = \Backers\Models\Client::offset( $offset )->limit( $limit )->get();
 
         $view = $app->service('view.renderer');
-        return $view->render('clients/list.html.twig', compact('clients'));
+        return $view->render('clients/list.html.twig', compact('clients', 'page'));
     }, 'clients.list'
 );
 
