@@ -46,7 +46,7 @@ class ClientSeeder extends AbstractSeed
 
         $dataCPF = $dataCNPJ = [];
 
-        foreach( range(1,5) as $value )
+        foreach( range(1,10) as $value )
         {
             $dataCPF[] = [
                 'name' => $faker->name(),
@@ -60,7 +60,7 @@ class ClientSeeder extends AbstractSeed
             ];
         }
 
-        foreach( range(1,5) as $value )
+        foreach( range(1,10) as $value )
         {
 
 

@@ -3,7 +3,7 @@
 use \Psr\Http\Message\ServerRequestInterface;
 
 $app->get(
-    '/clientes', function (ServerRequestInterface $request) use ($app) {
+    '/clientes-pf', function (ServerRequestInterface $request) use ($app) {
 
         #$auth = $app->service('auth');
 
@@ -15,23 +15,58 @@ $app->get(
         #dd( $request->getQueryParams()['page'] );
         //$data['page'] = $auth->user()->getId();
 
-        $limit = 3;
+        $limit = 10;
 
         if( isset($request->getQueryParams()['page']) ){
             $page = $request->getQueryParams()['page'];
             $offset = $page +1;
         }else{
             $offset = 0;
-            $page = 1;
+            $page = 0;
         }
 
-        #$clients = \Backers\Models\Client::all();
+        $clients = \Backers\Models\Client::where('doc_type', 'cpf')->orderBy('created_at', 'desc')->get();
         #$clients = \Backers\Models\Client::skip( $page )->take(2)->get();
-        $clients = \Backers\Models\Client::offset( $offset )->limit( $limit )->get();
+        #$clients = \Backers\Models\Client::offset( $offset )->limit( $limit )->get();
+
+        $docType = 'cpf';
 
         $view = $app->service('view.renderer');
-        return $view->render('clients/list.html.twig', compact('clients', 'page'));
-    }, 'clients.list'
+        return $view->render('clients/list-pf.html.twig', compact('clients', 'page', 'docType'));
+    }, 'clients.list-pf'
+);
+
+$app->get(
+    '/clientes-pj', function (ServerRequestInterface $request) use ($app) {
+
+        #$auth = $app->service('auth');
+
+        #$repository = $app->service('client.repository');
+        #$clients = $repository->all();
+
+        #$data = $request->getParsedBody();
+        //$page = $request->getQueryParams()['page'];
+        #dd( $request->getQueryParams()['page'] );
+        //$data['page'] = $auth->user()->getId();
+
+        $limit = 10;
+
+        if( isset($request->getQueryParams()['page']) ){
+            $page = $request->getQueryParams()['page'];
+            $offset = $page +1;
+        }else{
+            $offset = 0;
+            $page = 0;
+        }
+
+        $clients = \Backers\Models\Client::where('doc_type', 'cnpj')->orderBy('created_at', 'desc')->get();
+        #$clients = \Backers\Models\Client::skip( $page )->take(2)->get();
+        #$clients = \Backers\Models\Client::offset( $offset )->limit( $limit )->get();
+        $docType = 'cnpj';
+
+        $view = $app->service('view.renderer');
+        return $view->render('clients/list-pj.html.twig', compact('clients', 'page', 'docType'));
+    }, 'clients.list-pj'
 );
 
 $app->get(
@@ -129,6 +164,10 @@ $app->get(
         $id = $request->getAttribute('id');
 
         $repository = $app->service('client.repository');
+
+        $client = $repository->findOneBy(['id' => $id]);
+        $route = $client->doc_type == 'cpf' ? 'clients.list-pf' : 'clients.list-pj' ;
+
         $repository->delete(
             [
             'id' => $id,
@@ -136,6 +175,8 @@ $app->get(
             ]
         );
 
-        return $app->route('clients.list');
+        
+
+        return $app->route( $route );
     }, 'client.delete'
 );

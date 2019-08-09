@@ -31,7 +31,7 @@ $app->post(
             return $view->render('auth/login.html.twig');
         }
 
-        return $app->route('clients.list');
+        return $app->route('clients.list-pf');
     }, 'auth.login'
 );
 

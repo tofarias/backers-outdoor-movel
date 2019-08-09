@@ -12,7 +12,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        Administração de clientes
+                        Administração de clientes - PF
                     </h3>
                 </div>
                 <div class="panel-body">
@@ -30,28 +30,22 @@
                                 <thead>
                                 <tr>
                                     <th style="width: 10px">#</th>
-                                    <th class="text-center">Nome</th>
-                                    <th class="text-center">Email</th>
-                                    <th>Telefone</th>
-                                    <th class="text-center">Tipo</th>
-                                    <th class="text-center">Número</th>
-                                    <th class="text-center">Ramo / Empresa</th>
-                                    <th class="text-center">Veículo Modelo</th>
-                                    <th class="text-center">DT. Cadastro</th>
-                                    <th class="text-center">Ações</th>
+                                    <th class="text-center">NOME</th>
+                                    <th class="text-center">E-MAIL</th>
+                                    <th class="text-center">TELEFONE</th>
+                                    <th class="text-center">DOCUMENTO</th>
+                                    <th class="text-center">DT. CADASTRO</th>
+                                    <th class="text-center">AÇÕES</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {% for client in clients %}
                                     <tr>
-                                        <td>{{ client.id }}</td>
+                                        <td>{{ loop.index }}</td>
                                         <td>{{ client.name }}</td>
                                         <td>{{ client.email }}</td>
                                         <td>{{ client.phone }}</td>
-                                        <td class="font-8pt">{{ client.doc_type|upper }}</td>
                                         <td>{{ client.doc_id }}</td>
-                                        <td align="center">{{ client.company_category ?: '-' }}</td>
-                                        <td align="center">{{ client.car_model ?: '-' }}</td>
                                         <td>{{ client.created_at|date('d/m/Y H:i') }}</td>
 
                                         <td class="text-center">
@@ -67,7 +61,7 @@
                                 {% endfor %}
                                 </tbody>
                             </table>
-                            {{ myMacros.pagination(clients|length, page, '/clientes?page=', 3) }}
+                            {# {{ myMacros.pagination(clients|length, page, '/clientes?page=') }} #}
                         </div>
                     </div>
                 </div>
