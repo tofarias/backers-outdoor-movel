@@ -44,7 +44,8 @@ $app->before(
         'auth.show_login_form',
         'auth.login',
         'site.index',
-        'site.contact'
+        'site.contact',
+        'site.contact.message.send'
         ];
 
         if(!in_array($route->name, $routeWhiteList) && !$auth->check() ) {
