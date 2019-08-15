@@ -42,7 +42,8 @@ $app->before(
         $auth = $app->service('auth');
         $routeWhiteList = [
         'auth.show_login_form',
-        'auth.login'
+        'auth.login',
+        'site.index'
         ];
 
         if(!in_array($route->name, $routeWhiteList) && !$auth->check() ) {
