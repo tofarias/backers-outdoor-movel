@@ -11,30 +11,30 @@
                         <div class="col-lg-12 col-md-12 text-center">
                             <h1>Entre em Contato</h1>
                         </div>
-                        <form method="POST" action="{{ route('site.contact.message.send') }}">
+                        <form method="POST" action="{{ route('site.contact.message.send') }}" onSubmit="return validateForm(this);">
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
-                                    <input type="text" name="name" class="form-control require" placeholder="NOME">
+                                    <input type="text" required name="name" class="form-control require" placeholder="NOME">
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
-                                    <input type="text" name="email" class="form-control require" placeholder="E-MAIL" data-valid="email" data-error="Email should be valid.">
+                                    <input type="email" required name="email" class="form-control require" placeholder="E-MAIL" data-valid="email" data-error="Email should be valid.">
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
-                                    <input type="text" name="address" class="form-control require" placeholder="ENDEREÇO" data-valid="address" data-error="Email should be valid.">
+                                    <input type="text" required name="address" class="form-control require" placeholder="ENDEREÇO" data-valid="address" data-error="Email should be valid.">
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
-                                    <input type="text" name="subject" class="form-control" placeholder="ASSUNTO">
+                                    <input type="text" required name="subject" class="form-control" placeholder="ASSUNTO">
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
-                                    <textarea name="message" class="form-control" placeholder="MENSAGEM"></textarea>
+                                    <textarea name="message" required class="form-control" placeholder="MENSAGEM"></textarea>
                                 </div>
                             </div>
                             <div class="response"></div>
@@ -83,3 +83,35 @@
     </div>
 
 {% endblock %}
+
+{% block scripts %}
+    
+    function validateForm(form)
+    {
+        debugger;
+        var isValid = true;
+        if( form.elements.name.value.length < 4 ){
+            alert('O campo NOME deve ser preenchido!');
+            isValid = false;
+        }else
+        if( form.elements.email.value.length < 4 ){
+            alert('O campo E-MAIL deve ser preenchido!');
+            isValid = false;
+        }else
+        if( form.elements.address.value.length < 4 ){
+            alert('O campo ENDEREÇO deve ser preenchido!');
+            isValid = false;
+        }else
+        if( form.elements.subject.value.length < 4 ){
+            alert('O campo ASSUNTO deve ser preenchido!');
+            isValid = false;
+        }else
+        if( form.elements.message.value.length < 4 ){
+            alert('O campo MENSAGEM deve ser preenchido!');
+            isValid = false;
+        }
+
+        return false;
+    }
+
+{% endblock scripts %}
