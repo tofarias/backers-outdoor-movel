@@ -20,6 +20,7 @@ $app->get(
 $app->post(
     '/login', function (\Psr\Http\Message\ServerRequestInterface $request) use ($app) {
 
+        $flash = $app->service('flash_message');
         $view = $app->service('view.renderer');
         $auth = $app->service('auth');
 
@@ -28,6 +29,8 @@ $app->post(
         $result = $auth->login($data);
 
         if(!$result ) {
+
+            $flash->error('Usuário ou senha incorretos!');
             return $view->render('auth/login.html.twig');
         }
 
