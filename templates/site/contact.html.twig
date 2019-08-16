@@ -85,33 +85,39 @@
 {% endblock %}
 
 {% block scripts %}
-    
+
     function validateForm(form)
     {
-        debugger;
         var isValid = true;
-        if( form.elements.name.value.length < 4 ){
-            alert('O campo NOME deve ser preenchido!');
+        var msg= "O campo {STRING} deve ter no mínimo {INT} caracteres!";
+
+        if( form.elements.name.value.length < 5 ){
+            msg = msg.replace("{STRING}", 'NOME').replace("{INT}", 5);
             isValid = false;
         }else
-        if( form.elements.email.value.length < 4 ){
+        if( form.elements.email.value.length < 10 ){
+            msg = msg.replace("{STRING}", 'E-MAIL').replace("{INT}", 10);
             alert('O campo E-MAIL deve ser preenchido!');
             isValid = false;
         }else
-        if( form.elements.address.value.length < 4 ){
-            alert('O campo ENDEREÇO deve ser preenchido!');
+        if( form.elements.address.value.length < 5 ){
+            msg = msg.replace("{STRING}", 'ENDEREÇO').replace("{INT}", 5);
             isValid = false;
         }else
-        if( form.elements.subject.value.length < 4 ){
-            alert('O campo ASSUNTO deve ser preenchido!');
+        if( form.elements.subject.value.length < 5 ){
+            msg = msg.replace("{STRING}", 'ASSUNTO').replace("{INT}", 5);
             isValid = false;
         }else
-        if( form.elements.message.value.length < 4 ){
-            alert('O campo MENSAGEM deve ser preenchido!');
+        if( form.elements.message.value.length < 20 ){
+            msg = msg.replace("{STRING}", 'ASSUNTO').replace("{INT}", 20);
             isValid = false;
         }
 
-        return false;
+        if( !isValid ){
+            alert(msg);
+        }
+
+        return isValid;
     }
 
 {% endblock scripts %}
