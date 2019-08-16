@@ -19,12 +19,17 @@
                             </div>
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
-                                    <input type="email" required name="email" class="form-control require" placeholder="E-MAIL" data-valid="email" data-error="Email should be valid.">
+                                    <input type="text" required name="phone" class="form-control require" placeholder="Telefone DDD 00000 0000">
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group">
-                                    <input type="text" required name="address" class="form-control require" placeholder="ENDEREÇO" data-valid="address" data-error="Email should be valid.">
+                                    <input type="email" required name="email" class="form-control require" placeholder="E-MAIL">
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <input type="text" required name="address" class="form-control require" placeholder="ENDEREÇO">
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12">
@@ -95,6 +100,10 @@
             msg = msg.replace("{STRING}", 'NOME').replace("{INT}", 5);
             isValid = false;
         }else
+        if( form.elements.phone.value.length < 10 ){
+            msg = msg.replace("{STRING}", 'TELEFONE').replace("{INT}", 10);
+            isValid = false;
+        }else
         if( form.elements.email.value.length < 10 ){
             msg = msg.replace("{STRING}", 'E-MAIL').replace("{INT}", 10);
             alert('O campo E-MAIL deve ser preenchido!');
@@ -108,8 +117,8 @@
             msg = msg.replace("{STRING}", 'ASSUNTO').replace("{INT}", 5);
             isValid = false;
         }else
-        if( form.elements.message.value.length < 20 ){
-            msg = msg.replace("{STRING}", 'ASSUNTO').replace("{INT}", 20);
+        if( form.elements.message.value.length < 10 ){
+            msg = msg.replace("{STRING}", 'ASSUNTO').replace("{INT}", 10);
             isValid = false;
         }
 
