@@ -15,8 +15,9 @@ class Client extends Model
         'phone',
         'created_at',
         'car_model',
+        'car_Color',
         'doc_id',
-        'doc_typr',
+        'doc_type',
         'company_category',
         'phone_prefix'
     ];
