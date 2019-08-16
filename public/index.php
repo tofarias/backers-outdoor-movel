@@ -8,6 +8,11 @@ if( file_exists(__DIR__.'/../.env') ){
     $dotEnv->overload();
 }
 
+if( file_exists(__DIR__.'/../mail.config.env') ){
+    $dotEnv = \Dotenv\Dotenv::create(__DIR__,'/../mail.config.env');
+    $dotEnv->overload();
+}
+
 $serviceContainer = new \Backers\ServiceContainer();
 $app = new \Backers\Application( $serviceContainer );
 

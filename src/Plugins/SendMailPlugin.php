@@ -11,14 +11,14 @@ class SendMailPlugin implements PluginInterface
     public function register(ServiceContainerInterface $container)
     {
         //Create a new PHPMailer instance
-        $mail = new PHPMailer;
+        $mail = new PHPMailer(false);
         //Tell PHPMailer to use SMTP
-        $mail->isSMTP();
+        $mail->isSMTP(true);
         //Enable SMTP debugging
         // 0 = off (for production use)
         // 1 = client messages
         // 2 = client and server messages
-        $mail->SMTPDebug = 2;
+        $mail->SMTPDebug = 0;
         //Set the hostname of the mail server
         $mail->Host = 'smtp.gmail.com';
         // use
@@ -29,17 +29,17 @@ class SendMailPlugin implements PluginInterface
         //Set the encryption system to use - ssl (deprecated) or tls
         $mail->SMTPSecure = 'tls';
         //Whether to use SMTP authentication
-        $mail->SMTPAuth = false;
+        $mail->SMTPAuth = true;
         //Username to use for SMTP authentication - use full email address for gmail
         $mail->Username = "tiago.farias.poa@gmail.com";
         //Password to use for SMTP authentication
         $mail->Password = "Syncmaster743n1";
         //Set who the message is to be sent from
-        $mail->setFrom('from@example.com', 'First Last');
+        $mail->setFrom('tiago.farias.poa@gmail.com', 'First Last');
         //Set an alternative reply-to address
         //$mail->addReplyTo('replyto@example.com', 'First Last');
         //Set who the message is to be sent to
-        $mail->addAddress('tiago.farias@consulting-for.edenred.com', 'John Doe');
+        $mail->addAddress('tiago.farias.poa@gmail.com', 'John Doe');
         //Set the subject line
         $mail->Subject = 'PHPMailer GMail SMTP test';
         //Read an HTML message body from an external file, convert referenced images to embedded,
@@ -52,8 +52,7 @@ class SendMailPlugin implements PluginInterface
         //send the message, check for errors
 
         $mail->isHTML(true);                                  // Set email format to HTML
-        $mail->Subject = 'Here is the subject';
-        $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+        
 
         /*
         if (!$mail->send()) {

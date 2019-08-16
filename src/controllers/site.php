@@ -21,19 +21,51 @@ $app->get(
 $app->post(
     '/contato/enviar-mensagem', function (ServerRequestInterface $request) use ($app) {
 
-        $mail = $app->service('mail');
+        $data = $request->getParsedBody();
 
-        if (!$mail->send()) {
-            echo '<pre>';
-            echo "Mailer Error: " . $mail->ErrorInfo;
-            echo '</pre>';
-        } else {
-            echo "Message sent!";
+        $mensagem = '';
+
+        if( isset($data['name']) && !empty($data['name']) ){
+            $mensagem .= '<tr><td>';
+            $mensagem .= "<b>Nome:</b> <br>".$data['name'];
+            $mensagem .= '</td></tr>';
+        }
+        if( isset($data['email']) && !empty($data['email']) ){
+            $mensagem .= '<tr><td>';
+            $mensagem .= "<b>E-mail:</b> <br>".$data['email'];
+            $mensagem .= '</td></tr>';
+        }
+        if( isset($data['address']) && !empty($data['address']) ){
+            $mensagem .= '<tr><td>';
+            $mensagem .= "<b>Endereço:</b> <br>".$data['address'];
+            $mensagem .= '</td></tr>';
+        }
+        if( isset($data['subject']) && !empty($data['subject']) ){
+            $mensagem .= '<tr><td>';
+            $mensagem .= "<b>Assunto:</b> <br>".$data['subject'];
+            $mensagem .= '</td></tr>';
+        }
+        if( isset($data['message']) && !empty($data['message']) ){
+            $mensagem .= '<tr><td>';
+            $mensagem .= "<b>Mensagem:</b> <br>".$data['message'];
+            $mensagem .= '</td></tr>';
         }
 
-        dd( $mail );
+        $mail = $app->service('mail');
 
-        $view = $app->service('view.renderer');
-        return $view->render('site/contact.html.twig', []);
+        $mail->Subject = env('ASSUNTO', 'NOVA MENSAGEM DO FORMULÁRIO DE CONTATO');
+        $mail->Body    = $mensagem;
+        
+        if (!$mail->send()) {
+            echo "Mailer Error: " . $mail->ErrorInfo;
+        } else {
+            //echo 'Ok';
+        }
+
+        //$view = $app->service('view.renderer');
+        //return $view->render('site/contact.html.twig', []);
+
+        return $app->redirect('/contato');
+
     }, 'site.contact.message.send'
 );
