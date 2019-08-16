@@ -34,6 +34,9 @@ Purchase: http://themeforest.net/user/kamleshyadav
     <link rel="stylesheet" type="text/css" href="css/style.min.css">
     <!-- Favicon Link -->
     <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+    <style>
+        {% block style %}{% endblock style %}
+    </style>
 </head>
 
 <body>
@@ -152,7 +155,7 @@ Purchase: http://themeforest.net/user/kamleshyadav
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="impl_logo">
-                            <a href="index.html"><img src="images/logo1.png" alt="Logo" class="img-fluid"></a>
+                            {# <a href="index.html"><img src="images/logo1.png" alt="Logo" class="img-fluid"></a> #}
                         </div>
                         <button class="impl_menu_btn">
 			<i class="fa fa-car" aria-hidden="true"></i>
@@ -160,7 +163,7 @@ Purchase: http://themeforest.net/user/kamleshyadav
 		</button>
                         <div class="impl_menu_inner">
                             <div class="impl_logo_responsive">
-                                <a href="index.html"><img src="images/logo1.png" alt="Logo" class="img-fluid"></a>
+                                {# <a href="index.html"><img src="images/logo1.png" alt="Logo" class="img-fluid"></a> #}
                             </div>
                             {# <a href="sell_step.html" class="impl_btn">Sell your car</a> #}
                             <div class="impl_menu">
@@ -175,13 +178,8 @@ Purchase: http://themeforest.net/user/kamleshyadav
                                                 <li><a href="home.html">Home version2</a></li>
                                             </ul> #}
                                         </li>
-                                        <li><a href="about.html">Sobre Nós</a></li>
-                                        <li class="dropdown"><a href="javascript:;">Cadastros</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="purchase_new.html">Pessoa Física</a></li>
-                                                <li><a href="purchase_used.html">Pessoa Jurídica</a></li>
-                                            </ul>
-                                        </li>
+                                        <li><a href="{{ route('site.about') }}">Sobre Nós</a></li>
+                                        <li class="dropdown"><a href="{{ route('site.cadastrar') }}">Cadastrar</a></li>
                                         {# <li><a href="service.html">services</a></li>
                                         <li class="dropdown"><a href="javascript:;">blog</a>
                                             <ul class="sub-menu">

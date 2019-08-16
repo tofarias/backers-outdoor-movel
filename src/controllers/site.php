@@ -11,6 +11,22 @@ $app->get(
 );
 
 $app->get(
+    '/empresa', function (ServerRequestInterface $request) use ($app) {
+
+        $view = $app->service('view.renderer');
+        return $view->render('site/about.html.twig', []);
+    }, 'site.about'
+);
+
+$app->get(
+    '/cadastrar', function (ServerRequestInterface $request) use ($app) {
+
+        $view = $app->service('view.renderer');
+        return $view->render('site/register.html.twig', []);
+    }, 'site.cadastrar'
+);
+
+$app->get(
     '/contato', function (ServerRequestInterface $request) use ($app) {
 
         $view = $app->service('view.renderer');
