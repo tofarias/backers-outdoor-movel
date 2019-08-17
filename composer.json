@@ -30,10 +30,15 @@
         "fzaninotto/faker": "^1.4"
     },
     "scripts": {
-        "db:refresh": [
+        "db:refresh-windows": [
             "vendor\\bin\\phinx.bat rollback -t 0 -e development --ansi",
             "vendor\\bin\\phinx.bat migrate -e development --ansi",
             "vendor\\bin\\phinx.bat seed:run -e development --ansi"
+        ],
+        "db:refresh-linux": [
+            "vendor/bin/phinx rollback -t 0 -e development --ansi",
+            "vendor/bin/phinx migrate -e development --ansi",
+            "vendor/bin/phinx seed:run -e development --ansi"
         ]
     }
 }
