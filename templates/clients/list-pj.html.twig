@@ -30,12 +30,9 @@
                                 <thead>
                                 <tr>
                                     <th style="width: 10px">#</th>
-                                    <th class="text-center">NOME</th>
                                     <th class="text-center">E-MAIL</th>
-                                    <th class="text-center">TELEFONE</th>
                                     <th class="text-center">DOCUMENTO</th>
                                     <th class="text-center">RAMO / EMPRESA</th>
-                                    <th class="text-center">VEÍCULO / MODELO</th>
                                     <th class="text-center">DT. CADASTRO</th>
                                     <th class="text-center">AÇÕES</th>
                                 </tr>
@@ -44,12 +41,9 @@
                                 {% for client in clients %}
                                     <tr>
                                         <td>{{ loop.index }}</td>
-                                        <td>{{ client.name }}</td>
                                         <td>{{ client.email }}</td>
-                                        <td>{{ client.phone }}</td>
-                                        <td>{{ client.doc_id }}</td>
-                                        <td align="center">{{ client.company_category ?: '-' }}</td>
-                                        <td align="center">{{ client.car_model ?: '-' }}</td>
+                                        <td>{{ client.doc_id }}</td>                                       
+                                        <td>{{ client.company_category ?: '-' }}</td>
                                         <td>{{ client.created_at|date('d/m/Y H:i') }}</td>
 
                                         <td class="text-center">

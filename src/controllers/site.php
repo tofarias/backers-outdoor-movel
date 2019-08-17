@@ -19,11 +19,25 @@ $app->get(
 );
 
 $app->get(
-    '/cadastrar', function (ServerRequestInterface $request) use ($app) {
+    '/cliente/cadastrar', function (ServerRequestInterface $request) use ($app) {
 
         $view = $app->service('view.renderer');
         return $view->render('site/register.html.twig', []);
-    }, 'site.cadastrar'
+    }, 'site.cliente.cadastrar'
+);
+
+$app->post(
+    '/cliente/salvar', function (\Psr\Http\Message\ServerRequestInterface $request) use ($app) {
+
+        $data = $request->getParsedBody();
+
+        //dd( $data );
+
+        $repository = $app->service('client.repository');
+        $repository->create($data);
+
+        return $app->route('site.cliente.cadastrar');
+    }, 'site.cliente.post.cadastrar'
 );
 
 $app->get(

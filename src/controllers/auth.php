@@ -49,7 +49,8 @@ $app->before(
         'site.index',
         'site.contact',
         'site.contact.message.send',
-        'site.cadastrar',
+        'site.cliente.cadastrar',
+        'site.cliente.post.cadastrar',
         'site.about'
         ];
 

@@ -16,7 +16,7 @@
                         <div class="col-lg-12 col-md-12 text-center">
                             <h1>Cadastro</h1>
                         </div>
-                        <form method="POST" action="{{ route('site.contact.message.send') }}" onSubmit="return validateForm(this);">
+                        <form method="POST" action="{{ route('site.cliente.post.cadastrar') }}" onSubmit="">
                             <div style="min-height: 560px;">
                                 <div class="row">
                                     <div class="col-lg-8 col-md-8 ">
@@ -134,24 +134,49 @@ function trataCampos(el)
         $('[name="doc_id"]').attr('placeholder', 'CPF')
 
         $('[name="name"]').parent('div').show();
+        $('[name="name"]').attr('required');
+
         $('[name="phone"]').parent('div').show();
+        $('[name="phone"]').attr('required');
+
         $('[name="phone_prefix"]').parent('div').show();
+        $('[name="phone_prefix"]').attr('required');
+
         $('[name="doc_id"]').parent('div').show();
+        $('[name="doc_id"]').attr('required');
+
         $('[name="car_model"]').parent('div').show();
+        $('[name="car_model"]').attr('required');
+
         $('[name="car_color"]').parent('div').show();
+        $('[name="car_color"]').attr('required');
+
         $('[name="company_category"]').parent('div').hide();
+        $('[name="company_category"]').removeAttr('required');
 
         break;
 
         case 'cnpj':
 
         $('[name="name"]').parent('div').hide();
+        $('[name="name"]').removeAttr('required');
+
         $('[name="doc_id"]').attr('placeholder', 'CNPJ');
+        
         $('[name="car_model"]').parent('div').hide();
+        $('[name="car_model"]').removeAttr('required');
+        
         $('[name="car_color"]').parent('div').hide();
+        $('[name="car_color"]').removeAttr('required');
+        
         $('[name="phone"]').parent('div').hide();
+        $('[name="phone"]').removeAttr('required');
+        
         $('[name="phone_prefix"]').parent('div').hide();
+        $('[name="phone_prefix"]').removeAttr('required');
+        
         $('[name="company_category"]').parent('div').show();
+        $('[name="company_category"]').removeAttr('required');
 
         break;
     }

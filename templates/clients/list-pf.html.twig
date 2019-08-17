@@ -34,6 +34,8 @@
                                     <th class="text-center">E-MAIL</th>
                                     <th class="text-center">TELEFONE</th>
                                     <th class="text-center">DOCUMENTO</th>
+                                    <th class="text-center">VEÍCULO / MODELO</th>
+                                    <th class="text-center">VEÍCULO / COR</th>
                                     <th class="text-center">DT. CADASTRO</th>
                                     <th class="text-center">AÇÕES</th>
                                 </tr>
@@ -46,6 +48,8 @@
                                         <td>{{ client.email }}</td>
                                         <td>{{ client.phone }}</td>
                                         <td>{{ client.doc_id }}</td>
+                                        <td>{{ client.car_model }}</td>
+                                        <td>{{ client.car_color }}</td>
                                         <td>{{ client.created_at|date('d/m/Y H:i') }}</td>
 
                                         <td class="text-center">
