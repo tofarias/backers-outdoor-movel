@@ -20,8 +20,9 @@ class ViewPlugin implements PluginInterface
                 $generator = $container->get('routing.generator');
 
                 $auth = $container->get('auth');
+                $flashMessage = $container->get('flash_message');
 
-                $twig->addExtension(new TwigGlobals($auth));
+                $twig->addExtension(new TwigGlobals($auth, $flashMessage));
 
                 $twig->addFunction(
                     new \Twig_SimpleFunction(

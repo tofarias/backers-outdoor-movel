@@ -11,6 +11,22 @@ $app->get(
 );
 
 $app->get(
+    '/empresa', function (ServerRequestInterface $request) use ($app) {
+
+        $view = $app->service('view.renderer');
+        return $view->render('site/about.html.twig', []);
+    }, 'site.about'
+);
+
+$app->get(
+    '/cadastrar', function (ServerRequestInterface $request) use ($app) {
+
+        $view = $app->service('view.renderer');
+        return $view->render('site/register.html.twig', []);
+    }, 'site.cadastrar'
+);
+
+$app->get(
     '/contato', function (ServerRequestInterface $request) use ($app) {
 
         $view = $app->service('view.renderer');
@@ -35,6 +51,11 @@ $app->post(
             $mensagem .= "<b>E-mail:</b> <br>".$data['email'];
             $mensagem .= '</td></tr>';
         }
+        if( isset($data['phone']) && !empty($data['phone']) ){
+            $mensagem .= '<tr><td>';
+            $mensagem .= "<b>Telefone:</b> <br>".$data['phone'];
+            $mensagem .= '</td></tr>';
+        }
         if( isset($data['address']) && !empty($data['address']) ){
             $mensagem .= '<tr><td>';
             $mensagem .= "<b>Endereço:</b> <br>".$data['address'];
@@ -47,15 +68,15 @@ $app->post(
         }
         if( isset($data['message']) && !empty($data['message']) ){
             $mensagem .= '<tr><td>';
-            $mensagem .= "<b>Mensagem:</b> <br>".$data['message'];
+            $mensagem .= "<b>Mensagem:</b> <br><pre>".$data['message']."</pre>";
             $mensagem .= '</td></tr>';
         }
 
         $mail = $app->service('mail');
 
-        $mail->Subject = env('ASSUNTO', 'NOVA MENSAGEM DO FORMULÁRIO DE CONTATO');
+        $mail->Subject = env('SUBJECT', 'NOVA MENSAGEM DO FORMULÁRIO DE CONTATO');
         $mail->Body    = $mensagem;
-        
+
         if (!$mail->send()) {
             echo "Mailer Error: " . $mail->ErrorInfo;
         } else {
