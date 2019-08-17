@@ -66,6 +66,8 @@ class ClientSeeder extends AbstractSeed
                 'phone' => $faker->phone(),
                 'doc_id' => $faker->cpf,
                 'doc_type' => 'cpf',
+                'car_model' => $this->getCarModel(),
+                'car_color' => $this->getCarColor(),
                 'created_at' => $this->getCreatedAt($faker),
                 'updated_at' => date('Y-m-d H:i:s')
             ];
@@ -76,11 +78,7 @@ class ClientSeeder extends AbstractSeed
             $dataCNPJ[] = [
                 'name' => $faker->name(),
                 'email' => $faker->unique()->email(),
-                'phone_prefix' => $faker->randomNumber(2),
-                'phone' => $faker->phone(),
                 'company_category' => $this->getCompanyCategory(),
-                'car_model' => $this->getCarModel(),
-                'car_color' => $this->getCarColor(),
                 'doc_id' => $faker->cnpj,
                 'doc_type' => 'cnpj',
                 'created_at' => $this->getCreatedAt($faker),
