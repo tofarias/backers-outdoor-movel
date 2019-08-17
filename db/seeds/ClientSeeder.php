@@ -5,6 +5,17 @@ use Phinx\Seed\AbstractSeed;
 
 class ClientSeeder extends AbstractSeed
 {
+    const CAR_COLOR = [
+        'cinza',
+        'preto',
+        'amarelo',
+        'azul',
+        'verde',
+        'prata',
+        'vermelho',
+        'branco'
+    ];
+
     const CAR_MODEL = [
         'Classe SLS AMG',
         'Classe X',
@@ -62,8 +73,6 @@ class ClientSeeder extends AbstractSeed
 
         foreach( range(1,10) as $value )
         {
-
-
             $dataCNPJ[] = [
                 'name' => $faker->name(),
                 'email' => $faker->unique()->email(),
@@ -71,6 +80,7 @@ class ClientSeeder extends AbstractSeed
                 'phone' => $faker->phone(),
                 'company_category' => $this->getCompanyCategory(),
                 'car_model' => $this->getCarModel(),
+                'car_color' => $this->getCarColor(),
                 'doc_id' => $faker->cnpj,
                 'doc_type' => 'cnpj',
                 'created_at' => $this->getCreatedAt($faker),
@@ -95,5 +105,10 @@ class ClientSeeder extends AbstractSeed
     public function getCarModel()
     {
         return \Faker\Provider\Base::randomElement(self::CAR_MODEL);
+    }
+
+    public function getCarColor()
+    {
+        return \Faker\Provider\Base::randomElement(self::CAR_COLOR);
     }
 }
