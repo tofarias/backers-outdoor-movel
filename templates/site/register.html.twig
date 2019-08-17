@@ -14,7 +14,7 @@
                 <div class="col-lg-12 col-md-12 text-center">
                     <h1>Cadastro</h1>
                 </div>
-                <form method="POST" action="{{ route('site.cliente.post.cadastrar') }}" onSubmit="">
+                <form method="POST" action="{{ route('site.cliente.post.cadastrar') }}" onSubmit="return validate(this);">
                     <div style="min-height: 560px;">
                         <div class="row">
                             <div class="col-lg-8 col-md-8 ">
@@ -31,6 +31,7 @@
                         <div class="col-lg-12 col-md-12">
                             <div class="form-group">
                                 <input type="text" required name="doc_id" class="form-control require" placeholder="CPF">
+                                <span id="helpBlock" class="help-block"><i><b>Somente números.</b></i></span>
                             </div>
                         </div>
                         <div class="col-lg-12 col-md-12">
@@ -46,6 +47,7 @@
                         <div class="col-lg-12 col-md-12">
                             <div class="form-group">
                                 <input title="Telefone" type="text" required name="phone" class="form-control require" placeholder="TELEFONE">
+                                <span id="helpBlock" class="help-block"><i><b>Somente números.</b></i></span>
                             </div>
                         </div>
                         <div class="col-lg-12 col-md-12">
@@ -86,6 +88,16 @@
 {% block scripts %}
 
 $(function(){ trataCampos( document.getElementsByName('doc_type')[0] ); })
+
+function validate(el)
+{
+    if( confirm("Confirma o envio dos dados?") )
+    {
+        return true;
+    }
+
+    return false;
+}
 
 function trataCampos(el)
 {
