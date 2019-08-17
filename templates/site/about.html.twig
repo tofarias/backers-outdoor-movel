@@ -10,24 +10,51 @@ div#about {
 }
 
 h2 { margin: 0 auto; width: 50%; text-align: center; margin-top: 25px; }
+
+.banner
+{
+    position: relative;
+    z-index: 5;
+}
+
+.banner .bg {
+    position: absolute;
+    z-index: -1;
+    top: 100px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: url(images/backers01.png) center center;
+    background-size: 900px;
+    opacity: .1;
+    width: 100%;
+    height: 100%;
+    }
+
 {% endblock style %}
 
 {% block content %}
 
-<div class="row">
+<div class="row _insert-bg-image" style="min-height: 500px;">
     <div class="col-lg-12 col-md-12">
 
-        <h2>A Empresa</h2>
+        <div class="banner">
+            <div class="bg"></div>
+            <h2>A Empresa</h2>
 
-        <div id="about">
-        <p>Somos uma empresa com a solução para quem utiliza automóveis diariamente.
-        E uma solução para o Marketing da sua empresa.
-        </p>
-        <p>Como? Para carros utilitários, iremos alugar o vidro traseiro, gerando renda extra.
-        Para empresas, iremos divulgar sua marca ou produto em vidros traseiros de automóveis, tendo grande visibilidade,
-        onde em uma cidade grande a média de tempo gasto com trânsito é de 2 Horas e 28 Minutos em média, de acordo com a CNDL em 2018.
-        </p>
-        Cadastre-se ou entre em contato conosco e saiba mais
+            <div id="about">
+            <p>Somos uma empresa com a solução para quem utiliza automóveis diariamente.
+            E uma solução para o Marketing da sua empresa.
+            </p>
+            <p>Como? Para carros utilitários, iremos alugar o vidro traseiro, gerando renda extra.
+            Para empresas, iremos divulgar sua marca ou produto em vidros traseiros de automóveis, tendo grande visibilidade,
+            onde em uma cidade grande a média de tempo gasto com trânsito é de 2 Horas e 28 Minutos em média, de acordo com a CNDL em 2018.
+            </p>
+            Cadastre-se ou entre em contato conosco e saiba mais
+            </div>
+        </div>
+
+        
 
     </div>
 </div>
