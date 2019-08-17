@@ -20,6 +20,7 @@ class CreateClient extends AbstractMigration
             ->addColumn('company_category','string', ['null' => true])
 
             ->addIndex(['email'],['unique' => true])
+            ->addIndex(['doc_id'],['unique' => true])
 
             ->create();
     }
