@@ -76,7 +76,6 @@ class ClientSeeder extends AbstractSeed
         foreach( range(1,10) as $value )
         {
             $dataCNPJ[] = [
-                'name' => $faker->name(),
                 'email' => $faker->unique()->email(),
                 'company_category' => $this->getCompanyCategory(),
                 'doc_id' => $faker->cnpj,

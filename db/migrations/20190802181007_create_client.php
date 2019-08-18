@@ -7,7 +7,7 @@ class CreateClient extends AbstractMigration
     public function up()
     {
         $this->table('client')
-            ->addColumn('name','string')
+            ->addColumn('name','string',['null' => true])
             ->addColumn('email','string')
             ->addColumn('phone_prefix','string',['null' => true])
             ->addColumn('phone','string',['null' => true])
@@ -18,9 +18,6 @@ class CreateClient extends AbstractMigration
             ->addColumn('doc_id','string')
             ->addColumn('doc_type','enum',['values' => ['cpf', 'cnpj']])
             ->addColumn('company_category','string', ['null' => true])
-
-            ->addIndex(['email'],['unique' => true])
-            ->addIndex(['doc_id'],['unique' => true])
 
             ->create();
     }
