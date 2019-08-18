@@ -23,16 +23,8 @@ $app->plugin( new \Backers\Plugins\AuthPlugin() );
 $app->plugin( new \Backers\Plugins\SendMailPlugin() );
 $app->plugin( new \Backers\Plugins\FlashMessagePlugin() );
 
+require_once __DIR__.'/../src/controllers/admin.php';
 require_once __DIR__.'/../src/controllers/site.php';
-require_once __DIR__.'/../src/controllers/clients.php';
 require_once __DIR__.'/../src/controllers/auth.php';
-
-/*
-require_once __DIR__.'/../src/controllers/bill-receives.php';
-require_once __DIR__.'/../src/controllers/bill-pays.php';
-require_once __DIR__.'/../src/controllers/users.php';
-require_once __DIR__.'/../src/controllers/statements.php';
-require_once __DIR__.'/../src/controllers/charts.php';
-*/
 
 $app->start();

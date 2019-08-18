@@ -1,7 +1,7 @@
 <?php
 
 $app->get(
-    '/login', function () use ($app) {
+    '/admin/login', function () use ($app) {
 
         $view = $app->service('view.renderer');
         return $view->render('auth/login.html.twig');
@@ -9,7 +9,7 @@ $app->get(
 );
 
 $app->get(
-    '/logout', function () use ($app) {
+    '/admin/logout', function () use ($app) {
 
         $auth = $app->service('auth')->logout();
 
@@ -18,7 +18,7 @@ $app->get(
 );
 
 $app->post(
-    '/login', function (\Psr\Http\Message\ServerRequestInterface $request) use ($app) {
+    '/admin/login', function (\Psr\Http\Message\ServerRequestInterface $request) use ($app) {
 
         $flash = $app->service('flash_message');
         $view = $app->service('view.renderer');
@@ -34,7 +34,7 @@ $app->post(
             return $view->render('auth/login.html.twig');
         }
 
-        return $app->route('clients.list-pf');
+        return $app->route('admin.index');
     }, 'auth.login'
 );
 

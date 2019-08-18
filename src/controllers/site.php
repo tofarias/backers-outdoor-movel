@@ -38,10 +38,11 @@ $app->post(
 
         $data = $request->getParsedBody();
 
-        //dd( $data );
-
         $repository = $app->service('client.repository');
         $repository->create($data);
+
+        $flash = $app->service('flash_message');
+        $flash->success('Dados enviados com sucesso!');
 
         return $app->route('site.cliente.cadastrar');
     }, 'site.cliente.post.cadastrar'

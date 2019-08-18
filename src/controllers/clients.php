@@ -114,7 +114,7 @@ $app->get(
 );
 
 $app->get(
-    '/cliente/{id}/delete', function (\Psr\Http\Message\ServerRequestInterface $request) use ($app) {
+    '/admin/cliente/{id}/delete', function (\Psr\Http\Message\ServerRequestInterface $request) use ($app) {
         
         $id = $request->getAttribute('id');
 
@@ -133,44 +133,4 @@ $app->get(
 
         return $app->route( $route );
     }, 'client.delete'
-);
-
-$app->post(
-    '/site/texto/empresa', function (\Psr\Http\Message\ServerRequestInterface $request) use ($app) {
-
-        $data = $request->getParsedBody();
-
-        $repository = $app->service('site.repository');
-
-        $data = $request->getParsedBody();
-
-        $repository->update(
-            [
-            'id' => 1
-            ], $data
-        );
-
-        $flash = $app->service('flash_message');
-        $flash->success('Registro salvo com sucesso!');
-
-        return $app->route('site.about.edit');
-
-    },'site.about.save'
-);
-
-$app->get(
-    '/site/texto/empresa', function (\Psr\Http\Message\ServerRequestInterface $request) use ($app) {
-
-        
-        $repository = $app->service('site.repository');
-        $site = $repository->findOneBy(
-            [
-            'id' => 1
-            ]
-        );
-
-        $view = $app->service('view.renderer');
-        return $view->render('admin/texto.html.twig', compact('site'));
-
-    }, 'site.about.edit'
 );

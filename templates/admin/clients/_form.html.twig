@@ -1,0 +1,30 @@
+<form method="post" action=" {{ action }}">
+    <div class="form-group">
+        <label class="control-label">Nome</label>
+        <input class="form-control" type="text" placeholder="Nome"
+               name="name" value="{{ client.name }}">
+
+        <input class="form-control" type="text" placeholder="email"
+        name="email" value="{{ client.email }}">
+
+        <input class="form-control" type="text" placeholder="ddd"
+        name="phone_prefix" value="{{ client.phone_prefix }}">
+
+        <input class="form-control" type="text" placeholder="telefone"
+        name="phone" value="{{ client.phone }}">
+
+        <input class="form-control" type="text" placeholder="número documento"
+        name="doc_id" value="{{ client.doc_id }}">
+
+        <div class="radio">
+        <label><input type="radio" name="doc_type" checked>CPF</label>
+        </div>
+        <div class="radio">
+        <label><input type="radio" name="doc_type">CNPJ</label>
+        </div>
+
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">
+        <span class="glyphicon glyphicon-{{ submitIcon }}"></span>
+    </button>
+</form>

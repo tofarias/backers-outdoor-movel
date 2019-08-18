@@ -36,22 +36,13 @@
     .catch( error => {
         console.log( error );
     } );
-
-    ClassicEditor.editorConfig = function( config ) {
-
-    // Define changes to default configuration here.
-    // For the complete reference:
-    // http://docs.ckeditor.com/#!/api/CKEDITOR.config
-
-    config.extraPlugins = 'maxlength';
-
-    };
+    
 {% endblock %}
 
 {% block content %}
     <div class="container">
         <div class="row">
-            {{ Message.display('success') }}
+            {{ parent() }}
             <div class="alert alert-info" role="alert">Permite editar o texto que é exibido na página "Sobre Nós"</div>
             <form method="post" action="{{ route('site.about.save') }}">
                 <textarea autofocus data-maxlen="2" id="editor" name="text">{{ site.text }}</textarea>
