@@ -5,29 +5,7 @@ use \Psr\Http\Message\ServerRequestInterface;
 $app->get(
     '/clientes-pf', function (ServerRequestInterface $request) use ($app) {
 
-        #$auth = $app->service('auth');
-
-        #$repository = $app->service('client.repository');
-        #$clients = $repository->all();
-
-        #$data = $request->getParsedBody();
-        //$page = $request->getQueryParams()['page'];
-        #dd( $request->getQueryParams()['page'] );
-        //$data['page'] = $auth->user()->getId();
-
-        $limit = 10;
-
-        if( isset($request->getQueryParams()['page']) ){
-            $page = $request->getQueryParams()['page'];
-            $offset = $page +1;
-        }else{
-            $offset = 0;
-            $page = 0;
-        }
-
         $clients = \Backers\Models\Client::where('doc_type', 'cpf')->orderBy('created_at', 'desc')->get();
-        #$clients = \Backers\Models\Client::skip( $page )->take(2)->get();
-        #$clients = \Backers\Models\Client::offset( $offset )->limit( $limit )->get();
 
         $docType = 'cpf';
 
@@ -39,29 +17,8 @@ $app->get(
 $app->get(
     '/clientes-pj', function (ServerRequestInterface $request) use ($app) {
 
-        #$auth = $app->service('auth');
-
-        #$repository = $app->service('client.repository');
-        #$clients = $repository->all();
-
-        #$data = $request->getParsedBody();
-        //$page = $request->getQueryParams()['page'];
-        #dd( $request->getQueryParams()['page'] );
-        //$data['page'] = $auth->user()->getId();
-
-        $limit = 10;
-
-        if( isset($request->getQueryParams()['page']) ){
-            $page = $request->getQueryParams()['page'];
-            $offset = $page +1;
-        }else{
-            $offset = 0;
-            $page = 0;
-        }
-
         $clients = \Backers\Models\Client::where('doc_type', 'cnpj')->orderBy('created_at', 'desc')->get();
-        #$clients = \Backers\Models\Client::skip( $page )->take(2)->get();
-        #$clients = \Backers\Models\Client::offset( $offset )->limit( $limit )->get();
+        
         $docType = 'cnpj';
 
         $view = $app->service('view.renderer');
@@ -121,7 +78,6 @@ $app->post(
         $data = $request->getParsedBody();
 
         $repository = $app->service('client.repository');
-        $client = $repository->find( $id );
 
         $data = $request->getParsedBody();
         #$data['user_id'] = $auth->user()->getId();
@@ -159,8 +115,7 @@ $app->get(
 
 $app->get(
     '/cliente/{id}/delete', function (\Psr\Http\Message\ServerRequestInterface $request) use ($app) {
-
-        #$auth = $app->service('auth');
+        
         $id = $request->getAttribute('id');
 
         $repository = $app->service('client.repository');
@@ -170,8 +125,7 @@ $app->get(
 
         $repository->delete(
             [
-            'id' => $id,
-            #'user_id' => $auth->user()->getId()
+            'id' => $id
             ]
         );
 
@@ -179,4 +133,44 @@ $app->get(
 
         return $app->route( $route );
     }, 'client.delete'
+);
+
+$app->post(
+    '/site/texto/empresa', function (\Psr\Http\Message\ServerRequestInterface $request) use ($app) {
+
+        $data = $request->getParsedBody();
+
+        $repository = $app->service('site.repository');
+
+        $data = $request->getParsedBody();
+
+        $repository->update(
+            [
+            'id' => 1
+            ], $data
+        );
+
+        $flash = $app->service('flash_message');
+        $flash->success('Registro salvo com sucesso!');
+
+        return $app->route('site.about.edit');
+
+    },'site.about.save'
+);
+
+$app->get(
+    '/site/texto/empresa', function (\Psr\Http\Message\ServerRequestInterface $request) use ($app) {
+
+        
+        $repository = $app->service('site.repository');
+        $site = $repository->findOneBy(
+            [
+            'id' => 1
+            ]
+        );
+
+        $view = $app->service('view.renderer');
+        return $view->render('admin/texto.html.twig', compact('site'));
+
+    }, 'site.about.edit'
 );

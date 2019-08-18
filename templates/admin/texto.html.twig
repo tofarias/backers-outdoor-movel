@@ -1,0 +1,65 @@
+{% extends 'layout.admin.html.twig' %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="https://ckeditor.com/docs/ckeditor5/latest/assets/styles.css" type="text/css">
+<link rel="stylesheet" href="https://ckeditor.com/docs/ckeditor5/latest/snippets/features/build-text-alignment-source/snippet.css" type="text/css">
+<link rel="stylesheet" href="https://ckeditor.com/docs/ckeditor5/latest/assets/snippet-styles.css" type="text/css">
+{% endblock stylesheet %}
+
+{% block style %}
+.ck-rounded-corners .ck.ck-editor__main>.ck-editor__editable, .ck.ck-editor__main>.ck-editor__editable.ck-rounded-corners { min-height: 250px; }
+{% endblock style %}
+
+{% block scriptsource %}
+<script src="https://ckeditor.com/docs/ckeditor5/latest/snippets/features/build-text-alignment-source/snippet.js"></script>
+{% endblock %}
+
+{% block scripts %}
+    ClassicEditor
+    .create( document.querySelector( '#editor' ), {
+        alignment: {
+            options: [ 'left', 'right', 'center', 'justify' ]
+        },
+        toolbar: [
+            'heading',
+            '|',
+            'bulletedList',
+            'numberedList',
+            'alignment',
+            'undo',
+            'redo',
+            'link',
+            'bold',
+            'italic'
+        ]
+    } )
+    .catch( error => {
+        console.log( error );
+    } );
+
+    ClassicEditor.editorConfig = function( config ) {
+
+    // Define changes to default configuration here.
+    // For the complete reference:
+    // http://docs.ckeditor.com/#!/api/CKEDITOR.config
+
+    config.extraPlugins = 'maxlength';
+
+    };
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {{ Message.display('success') }}
+            <div class="alert alert-info" role="alert">Permite editar o texto que é exibido na página "Sobre Nós"</div>
+            <form method="post" action="{{ route('site.about.save') }}">
+                <textarea autofocus data-maxlen="2" id="editor" name="text">{{ site.text }}</textarea>
+                 <button type="submit" class="btn btn-primary btn-block">
+                    <span class="glyphicon glyphicon-{{ submitIcon }}">Salvar</span>
+                </button>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

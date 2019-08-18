@@ -13,8 +13,15 @@ $app->get(
 $app->get(
     '/empresa', function (ServerRequestInterface $request) use ($app) {
 
+        $repository = $app->service('site.repository');
+        $site = $repository->findOneBy(
+            [
+            'id' => 1
+            ]
+        );
+
         $view = $app->service('view.renderer');
-        return $view->render('site/about.html.twig', []);
+        return $view->render('site/about.html.twig', compact('site'));
     }, 'site.about'
 );
 
