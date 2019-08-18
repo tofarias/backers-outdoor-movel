@@ -9,8 +9,8 @@ if( file_exists(__DIR__.'/../.env') ){
 }
 
 if( file_exists(__DIR__.'/../.mail.config.env') ){
-    $dotEnv = \Dotenv\Dotenv::create(__DIR__,'/../.mail.config.env');
-    $dotEnv->overload();
+    $dotEnvMail = \Dotenv\Dotenv::create(__DIR__,'/../.mail.config.env');
+    $dotEnvMail->overload();
 }
 
 $serviceContainer = new \Backers\ServiceContainer();
@@ -27,4 +27,10 @@ require_once __DIR__.'/../src/controllers/admin.php';
 require_once __DIR__.'/../src/controllers/site.php';
 require_once __DIR__.'/../src/controllers/auth.php';
 
-$app->start();
+try {
+    $app->start();
+} catch (\Throwable $th) {
+    echo $th->getMessage();
+}
+
+

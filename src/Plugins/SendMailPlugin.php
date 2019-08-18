@@ -29,7 +29,7 @@ class SendMailPlugin implements PluginInterface
 
         $mail->Username = env('USERNAME');
 
-        $mail->Password = 'PASSWORD';
+        $mail->Password = env('PASSWORD');
 
         $mail->setFrom(env('FROM_EMAIL'), env('FROM_NAME'));
         //Set an alternative reply-to address

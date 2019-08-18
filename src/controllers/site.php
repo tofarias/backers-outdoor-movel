@@ -95,18 +95,15 @@ $app->post(
         }
 
         $mail = $app->service('mail');
-
         $mail->Subject = env('SUBJECT', 'NOVA MENSAGEM DO FORMULÁRIO DE CONTATO');
         $mail->Body    = $mensagem;
 
-        if (!$mail->send()) {
-            echo "Mailer Error: " . $mail->ErrorInfo;
-        } else {
-            //echo 'Ok';
+        if( !$mail->send() ){
+            throw new \Exception("Mailer Error: " . $mail->ErrorInfo);
         }
 
-        //$view = $app->service('view.renderer');
-        //return $view->render('site/contact.html.twig', []);
+        $flash = $app->service('flash_message');
+        $flash->success('Dados enviados com sucesso!');
 
         return $app->redirect('/contato');
 
