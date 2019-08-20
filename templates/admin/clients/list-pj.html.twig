@@ -8,6 +8,26 @@
 
 {% block content %}
     <div class="container">
+
+        <div class="row">
+
+            <div class="col-mg-12">
+
+                <form action="{{ route('clients.list-pj') }}" method="GET" class="form-inline">
+                    <div class="form-group">
+                        <label for="exampleInputName2">Dt. Inicio</label>
+                        <input type="date" value="{{ beginCreatedAt }}" name="begin_created_at" class="form-control" id="" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName2">Dt. Final</label>
+                        <input type="date" value="{{ endCreatedAt }}" name="end_created_at" class="form-control" id="" placeholder="">
+                    </div>
+                    <button type="submit" class="btn btn-default">Filtrar</button>
+                </form>
+
+            </div>
+        </div>
+        <br/>
         <div class="row">
             {{ parent() }}
             <div class="panel panel-primary">
@@ -17,13 +37,6 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    {# <div class="row">
-                        <div class="col-md-12">
-                            <a href="{{ route('client.new') }}" class="btn btn-default">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </a>
-                        </div>
-                    </div> #}
                     <br/>
                     <div class="row">
                         <div class="col-md-12">

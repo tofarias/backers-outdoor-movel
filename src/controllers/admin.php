@@ -1,6 +1,7 @@
 <?php
 
 use \Psr\Http\Message\ServerRequestInterface;
+use Illuminate\Database\Connection as DB;
 
 $app->get(
     '/admin', function (ServerRequestInterface $request) use ($app) {
@@ -13,24 +14,6 @@ $app->get(
 $app->get(
     '/admin/clientes-pf', function (ServerRequestInterface $request) use ($app) {
 
-        //dd( $data = $request->getQueryParams() );
-        $data = $request->getQueryParams();
-        $queryBuilder = \Backers\Models\Client::where('doc_type', 'cpf');
-
-        if( isset($data['begin_created_at']) && !empty($data['begin_created_at']) ){
-            if( isset($data['end_created_at']) && !empty($data['end_created_at']) ){
-
-                #$queryBuilder = $queryBuilder->where('created_at', '=>', $data['begin_created_at']);
-                #$queryBuilder = $queryBuilder->where('created_at', '<=', $data['end_created_at']);
-                $queryBuilder = $queryBuilder->where( \DB::raw("date(created_at) >= '" .$data['begin_created_at']."'"));
-                $clients = $queryBuilder->orderBy('created_at', 'desc')->get();
-
-                dd( $clients );
-            }
-        }else{
-            $clients = \Backers\Models\Client::where('doc_type', 'cpf')->orderBy('created_at', 'desc')->get();
-        }
-
         $docType = 'cpf';
 
         $date = new DateTime();
@@ -39,6 +22,24 @@ $app->get(
 
         $date->sub(new DateInterval('P5D'));
         $endCreatedAt = $date->format('Y-m-d');
+        
+        $data = $request->getQueryParams();
+
+        $queryBuilder = \Backers\Models\Client::where('doc_type', $docType);
+        $queryBuilder->orderBy('created_at', 'desc');
+
+        if( isset($data['begin_created_at']) && !empty($data['begin_created_at']) ){
+            if( isset($data['end_created_at']) && !empty($data['end_created_at']) ){
+
+                $beginCreatedAt = $data['begin_created_at'];
+                $endCreatedAt = $data['end_created_at'];
+                
+                $queryBuilder->whereRaw("date(created_at) >= '".$data['begin_created_at']."'");
+                $queryBuilder->whereRaw("date(created_at) <= '".$data['end_created_at']."'");                                
+            }
+        }
+
+        $clients = $queryBuilder->get();
 
         $view = $app->service('view.renderer');
         return $view->render('admin/clients/list-pf.html.twig', compact('clients', 'docType', 'beginCreatedAt', 'endCreatedAt'));
@@ -48,12 +49,35 @@ $app->get(
 $app->get(
     '/admin/clientes-pj', function (ServerRequestInterface $request) use ($app) {
 
-        $clients = \Backers\Models\Client::where('doc_type', 'cnpj')->orderBy('created_at', 'desc')->get();
-
         $docType = 'cnpj';
 
+        $date = new DateTime();
+
+        $beginCreatedAt = $date->format('Y-m-d');
+
+        $date->sub(new DateInterval('P5D'));
+        $endCreatedAt = $date->format('Y-m-d');
+        
+        $data = $request->getQueryParams();
+
+        $queryBuilder = \Backers\Models\Client::where('doc_type', $docType);
+        $queryBuilder->orderBy('created_at', 'desc');
+
+        if( isset($data['begin_created_at']) && !empty($data['begin_created_at']) ){
+            if( isset($data['end_created_at']) && !empty($data['end_created_at']) ){
+
+                $beginCreatedAt = $data['begin_created_at'];
+                $endCreatedAt = $data['end_created_at'];
+                
+                $queryBuilder->whereRaw("date(created_at) >= '".$data['begin_created_at']."'");
+                $queryBuilder->whereRaw("date(created_at) <= '".$data['end_created_at']."'");
+            }
+        }
+
+        $clients = $queryBuilder->get();
+
         $view = $app->service('view.renderer');
-        return $view->render('admin/clients/list-pj.html.twig', compact('clients', 'docType'));
+        return $view->render('admin/clients/list-pj.html.twig', compact('clients', 'docType', 'beginCreatedAt', 'endCreatedAt'));
     }, 'clients.list-pj'
 );
 

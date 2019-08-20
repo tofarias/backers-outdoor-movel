@@ -2,7 +2,6 @@
 declare(strict_types=1);
 namespace Backers\Plugins;
 
-use Backers\Repository\ClientRepository;
 use Backers\Repository\RepositoryFactory;
 use Backers\ServiceContainerInterface;
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -17,7 +16,7 @@ class DbPlugin implements PluginInterface
         $config = include __DIR__.'/../../config/db.php';
         $capsule->addConnection($config['default_connection']);
         $capsule->bootEloquent();
-
+        
         $container->add('repository.factory', new RepositoryFactory());
 
         $container->addLazy(
