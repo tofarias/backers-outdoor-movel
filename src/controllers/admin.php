@@ -22,7 +22,7 @@ $app->get(
 
         $date->sub(new DateInterval('P5D'));
         $endCreatedAt = $date->format('Y-m-d');
-        
+
         $data = $request->getQueryParams();
 
         $queryBuilder = \Backers\Models\Client::where('doc_type', $docType);
@@ -33,10 +33,13 @@ $app->get(
 
                 $beginCreatedAt = $data['begin_created_at'];
                 $endCreatedAt = $data['end_created_at'];
-                
+
                 $queryBuilder->whereRaw("date(created_at) >= '".$data['begin_created_at']."'");
-                $queryBuilder->whereRaw("date(created_at) <= '".$data['end_created_at']."'");                                
+                $queryBuilder->whereRaw("date(created_at) <= '".$data['end_created_at']."'");
             }
+        }else{
+            $queryBuilder->whereRaw("date(created_at) >= '".$beginCreatedAt."'");
+            $queryBuilder->whereRaw("date(created_at) <= '".$endCreatedAt."'");
         }
 
         $clients = $queryBuilder->get();
@@ -57,7 +60,7 @@ $app->get(
 
         $date->sub(new DateInterval('P5D'));
         $endCreatedAt = $date->format('Y-m-d');
-        
+
         $data = $request->getQueryParams();
 
         $queryBuilder = \Backers\Models\Client::where('doc_type', $docType);
@@ -68,10 +71,13 @@ $app->get(
 
                 $beginCreatedAt = $data['begin_created_at'];
                 $endCreatedAt = $data['end_created_at'];
-                
+
                 $queryBuilder->whereRaw("date(created_at) >= '".$data['begin_created_at']."'");
                 $queryBuilder->whereRaw("date(created_at) <= '".$data['end_created_at']."'");
             }
+        }else{
+            $queryBuilder->whereRaw("date(created_at) >= '".$beginCreatedAt."'");
+            $queryBuilder->whereRaw("date(created_at) <= '".$endCreatedAt."'");
         }
 
         $clients = $queryBuilder->get();
@@ -107,15 +113,12 @@ $app->get(
 $app->get(
     '/admin/cliente/{id}/show', function (\Psr\Http\Message\ServerRequestInterface $request) use ($app) {
 
-        #$auth = $app->service('auth');
-
         $id = $request->getAttribute('id');
 
         $repository = $app->service('client.repository');
         $client = $repository->findOneBy(
             [
-            'id' => $id,
-            #'user_id' => $auth->user()->getId()
+            'id' => $id
             ]
         );
 
