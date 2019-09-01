@@ -18,10 +18,11 @@ $app->get(
 
         $date = new DateTime();
 
+        $date->sub(new DateInterval('P5D'));
         $beginCreatedAt = $date->format('Y-m-d');
 
-        $date->sub(new DateInterval('P5D'));
-        $endCreatedAt = $date->format('Y-m-d');
+        $endCreatedAt = new DateTime();
+        $endCreatedAt = $endCreatedAt->format('Y-m-d');
 
         $data = $request->getQueryParams();
 
@@ -56,10 +57,11 @@ $app->get(
 
         $date = new DateTime();
 
+        $date->sub(new DateInterval('P5D'));
         $beginCreatedAt = $date->format('Y-m-d');
 
-        $date->sub(new DateInterval('P5D'));
-        $endCreatedAt = $date->format('Y-m-d');
+        $endCreatedAt = new DateTime();
+        $endCreatedAt = $endCreatedAt->format('Y-m-d');
 
         $data = $request->getQueryParams();
 
